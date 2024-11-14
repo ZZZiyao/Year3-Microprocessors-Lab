@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global  LCD_Setup, LCD_Write_Message
+global  LCD_Setup, LCD_Write_Message, LCD_Clear_Display
 
 psect	udata_acs   ; named variables in access ram
 LCD_cnt_l:	ds 1   ; reserve 1 byte for variable LCD_cnt_l
@@ -45,6 +45,8 @@ LCD_Setup:
 	movlw	10		; wait 40us
 	call	LCD_delay_x4us
 	return
+	
+
 
 LCD_Write_Message:	    ; Message stored at FSR2, length stored in W
 	movwf   LCD_counter, A
@@ -124,6 +126,13 @@ LCD_delay_x4us:		    ; delay given in chunks of 4 microsecond in W
 	andwf	LCD_cnt_l, F, A ; keep high nibble in LCD_cnt_l
 	call	LCD_delay
 	return
+	
+LCD_Clear_Display:
+        movlw   0x01;clear display
+	call LCD_Send_Byte_I;senf to register
+	call LCD_delay_ms;delay
+	return
+	
 
 LCD_delay:			; delay routine	4 instruction loop == 250ns	    
 	movlw 	0x00		; W=0

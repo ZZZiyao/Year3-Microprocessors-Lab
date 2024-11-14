@@ -1,7 +1,7 @@
 #include <xc.inc>
 
 extrn	UART_Setup, UART_Transmit_Message  ; external subroutines
-extrn	LCD_Setup, LCD_Write_Message
+extrn	LCD_Setup, LCD_Write_Message, LCD_Clear_Display
 	
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
@@ -13,7 +13,7 @@ myArray:    ds 0x80 ; reserve 128 bytes for message data
 psect	data    
 	; ******* myTable, data in programme memory, and its length *****
 myTable:
-	db	'H','e','l','l','o',' ','W','o','r','l','d','!',0x0a
+	db	'H','o','l','l','o',' ','W','o','r','l','d','!',0x0a
 					; message, plus carriage return
 	myTable_l   EQU	13	; length of data
 	align	2
@@ -30,7 +30,9 @@ setup:	bcf	CFGS	; point to Flash program memory
 	goto	start
 	
 	; ******* Main programme ****************************************
-start: 	lfsr	0, myArray	; Load FSR0 with address in RAM	
+start: 	
+        call    LCD_Clear_Display
+        lfsr	0, myArray	; Load FSR0 with address in RAM	
 	movlw	low highword(myTable)	; address of data in PM
 	movwf	TBLPTRU, A		; load upper bits to TBLPTRU
 	movlw	high(myTable)	; address of data in PM
