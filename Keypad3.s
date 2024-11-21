@@ -9,7 +9,7 @@ result:     ds 1
  
 psect   keypad_code, class=CODE
 Keypad_Setup:
-    movlb   15          ; Bank select for operation on REPU register
+    movlb   15
     bsf     REPU        ; Enable pull-ups on PORT E
     movlb   0           ; Return to bank 0 for normal operations
     clrf    LATE,A      ; Clear LATE register to set all E port pins low
