@@ -1,8 +1,8 @@
 #include <xc.inc>
  
 ; Declare external subroutines
-extern    Keypad_Setup, find_column, find_row, combine, find_key
-extern    LCD_Setup, LCD_Write_Message, LCD_Send_Byte_D
+extrn    Keypad_Setup, find_column, find_row, combine, find_key
+extrn    LCD_Setup, LCD_Write_Message, LCD_Send_Byte_D
  
 ; Data section for storing variables in access RAM
 psect    udata_acs   
@@ -10,9 +10,12 @@ result: ds  1   ; Variable to store the keypad result
 delay_count: ds 1      ; Variable for delay routine counter
  
 ; Code section for main program
-psect    main_code, class=CODE
+psect	code, abs	
+rst: 	org 0x0
+ 	goto	setup
+
 ; Main program entry point
-Main_loop:
+setup:
     call Keypad_Setup     ; Initialize the keypad
     call LCD_Setup        ; Initialize the LCD display
  
@@ -33,4 +36,4 @@ delay:
     bra delay             ; Loop until counter is zero
     return                ; Return from delay subroutine
  
-    end
+    end rst
