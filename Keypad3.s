@@ -6,6 +6,7 @@ psect   udata_acs
 column:     ds 1
 row:        ds 1
 result:     ds 1
+delay_count: ds 1      ; Variable for delay routine counter
  
 psect   keypad_code, class=CODE
 Keypad_Setup:
@@ -17,12 +18,14 @@ Keypad_Setup:
 find_column:
     movlw   0xF0        ; Set upper nibble high and lower nibble low for column reading
     movwf   TRISE, A    ; Set PORT E upper pins as inputs and lower pins as outputs
+    call    delay
     movf    PORTE, W, A ; Read PORT E value
     movwf   column, A   ; Store column value
  
 find_row:
     movlw   0x0F        ; Set lower nibble high and upper nibble low for row reading
     movwf   TRISE, A    ; Set PORT E lower pins as inputs and upper pins as outputs
+    call    delay
     movf    PORTE, W, A ; Read PORT E value
     movwf   row, A      ; Store row value
  
@@ -134,6 +137,11 @@ nextG:
     movlw   0xEE       ; Binary pattern for 'C' (11101110)
     cpfseq  result, A
     retlw   'C'        ; Return ASCII 'C'
+    
+delay:
+    decfsz delay_count, A ; Decrement the delay counter until zero
+    bra delay             ; Loop until counter is zero
+    return                ; Return from delay subroutine
  
     end
 
