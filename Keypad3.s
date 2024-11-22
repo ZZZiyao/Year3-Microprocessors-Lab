@@ -40,6 +40,7 @@ combine:
 find_key:
     movlw   0x00
     cpfseq  result, A  ; Compare result with 0x00, skip if equal
+    retlw 0x00
     bra     next1      ; Branch to next check if not equal
     retlw   0x00       ; Return 0x00 if no key pressed
  
