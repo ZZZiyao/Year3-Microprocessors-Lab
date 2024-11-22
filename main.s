@@ -16,6 +16,7 @@ rst: 	org 0x0
 
 ; Main program entry point
 setup:
+    clrf result,A
     call Keypad_Setup     ; Initialize the keypad
     call LCD_Setup        ; Initialize the LCD display
  
@@ -23,14 +24,22 @@ Main_Loop_Start:
     call find_column      ; Identify which column is pressed
     call find_row         ; Identify which row is pressed
     call combine          ; Combine results from row and column
-    call find_key         ; Decode the pressed key
+    ;call find_key         ; Decode the pressed key
     movf result, W, A     ; Move the detected key to the W register for display
+    bz clear_display
+    call find_key
+    movf result, W, A
     call LCD_Send_Byte_D    ; Send the detected key to the LCD display
     movlw 0xFF            ; Load 0xFF into W for delay counter initialization
     movwf delay_count, A  ; Initialize delay counter
     call delay            ; Call delay subroutine
     goto Main_Loop_Start  ; Repeat the main loop
 ; Delay subroutine
+    
+clear_display:
+    movlw 0x01
+    call LCD_Send_Byte_D
+    goto Main_Loop_Start
 delay:
     decfsz delay_count, A ; Decrement the delay counter until zero
     bra delay             ; Loop until counter is zero
