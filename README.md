@@ -1,6 +1,3 @@
 # Microprocessors
-Repository for Physics Year 3 microprocessors lab
+Outputs some 8-bit data to PORTC, which is connected to an external circuit (LEDs) to visualize the data.
 
-A simple assembly program for PIC18 microprocessor
-
-Reads a table from programme memory to data memory
