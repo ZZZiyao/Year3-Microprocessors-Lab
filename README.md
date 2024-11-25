@@ -1,8 +1,1 @@
-# Microprocessors
-Repository for Physics Year 3 microprocessors lab
-
-A simple assembly program for PIC18 microprocessor
-
-Reads a table (message) from programme memory to data memory
-
-Initialises UART and writes a message (the table) to UART 
+This PIC microcontroller assembly program interfaces with UART, an LCD display, and a Real-Time Clock and Calendar (RTCC). It initializes these peripherals to transmit a "Hello World!" message via UART, display it on the LCD without the final carriage return, and continuously update and output the current seconds to PORTD from the RTCC. 
