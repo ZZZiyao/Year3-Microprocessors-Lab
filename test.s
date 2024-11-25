@@ -2,7 +2,6 @@
 extrn    LCD_Setup, LCD_Write_Message, LCD_Send_Byte_D
 call LCD_Setup
  
-; ??????
 movlw 'H'
 call LCD_Send_Byte_D
 movlw 'e'
