@@ -1,8 +1,1 @@
-# Microprocessors
-Repository for Physics Year 3 microprocessors lab
-
-A simple assembly program for PIC18 microprocessor
-
-Reads a table (message) from programme memory to data memory
-
-Initialises UART and writes a message (the table) to UART 
+This assembly program is designed to interface with a keypad and an LCD display. It reads input from the keypad, decodes the pressed key, and displays the corresponding character or command on the LCD. The program utilizes external subroutines (ie. LCD.s, Keypad3.s) for setup and operation of the keypad and LCD, ensuring modularity and readability.
