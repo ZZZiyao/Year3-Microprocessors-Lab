@@ -1,8 +1,2 @@
-# Microprocessors
-Repository for Physics Year 3 microprocessors lab
+This program is designed to read analog voltages through ADC on pin RA0, convert these voltages to digital values, and display the results in hexadecimal format on an LCD. The setup includes initializing the ADC to capture analog input with specific voltage reference and acquisition settings, and continuously reading and converting these values using a polling method to ensure accuracy. The digital output is then formatted and displayed on the LCD, providing a real-time visualization of the analog voltage levels for monitoring or diagnostic purposes.
 
-A simple assembly program for PIC18 microprocessor
-
-Reads a table (message) from programme memory to data memory
-
-Initialises UART and writes a message (the table) to UART 
